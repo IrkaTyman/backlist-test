@@ -1,0 +1,5 @@
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  &,&.ant-select-item-option-active {
+    background-color: var(--active-element-background-color);
+  }
+}
