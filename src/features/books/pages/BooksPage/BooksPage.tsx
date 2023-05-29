@@ -1,11 +1,10 @@
 import React, {useState, useEffect, FC, memo} from 'react';
 import {Header} from "../../../../components/Header";
-import {BooksService} from "../../../../core/services/books-service";
+import {useBooksState} from "../../../../core/services/hooks/useBooksState";
+
 
 const BooksPageComponent: FC = () => {
-    useEffect(()=>{
-        BooksService.getBooks(1);
-    })
+    const {books, errorStatus, isLoading} = useBooksState('')
     return <Header/>;
 }
 
