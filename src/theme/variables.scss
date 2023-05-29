@@ -1,6 +1,5 @@
 :root {
 
-
   /* Border radius. */
   --border-radius-large: 30px;
   --border-radius-small: 5px;
@@ -8,7 +7,7 @@
   /* Padding */
   --space-medium: 16px;
   --space-small: 10px;
-  --space-very-small: 3px;
+  --space-very-small: 5px;
 
   /* Colors */
   --background-color: #F6F5F7;
@@ -19,11 +18,16 @@
   /* Font Size */
   --root-fs: 16px;
 
-  --text-fs-small: calc(var(--root-fs) * 0.8125);
+  --text-fs-small: calc(var(--root-fs) * 0.875);
   --text-fs-medium: var(--root-fs);
-  --text-fs-large: calc(var(--root-fs) * 1.25);
+  --text-fs-large: calc(var(--root-fs) * 1.125);
+  --title-fs-small: calc(var(--root-fs) * 1.25);
   --title-fs-medium: calc(var(--root-fs) * 1.5625);
   --title-fs-large: calc(var(--root-fs) * 1.875);
+
+  /* Box Shadow */
+  --box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  --box-shadow-hover: 0px 11px 18px rgba(0,0,0,0.3);
 }
 
 html {

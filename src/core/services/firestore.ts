@@ -1,5 +1,6 @@
 import {initializeApp} from 'firebase/app';
 import {getFirestore, collection} from 'firebase/firestore';
+import {Book} from "../models/book";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBAN5omgC3oNdUvvpe7Mrs4R9pY-6989Mg",

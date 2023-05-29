@@ -1,0 +1,35 @@
+.header{
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  padding: var(--space-small);
+  gap: var(--space-medium);
+  border-bottom: 1px solid var(--background-color);
+
+  .column{
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .header__logo{
+    height: var(--title-fs-large);
+  }
+
+  .header__search{
+  }
+
+  .header__actions{
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 900px){
+  .header{
+    .header__search{
+      flex-basis: 100%;
+      order:1
+    }
+  }
+}
