@@ -1,0 +1,19 @@
+.ant-input-affix-wrapper {
+  background-color: var(--background-color);
+  border-radius: var(--border-radius-large);
+  padding: var(--space-small) var(--space-medium);
+  border-color: var(--background-color);
+  box-shadow: var(--background-color);
+
+  &:hover, &:focus, &:active {
+    border-color: var(--active-element-color);
+  }
+
+  .ant-input-prefix{
+    color: var(--inactive-text-color);
+  }
+
+  .ant-input{
+    background-color: var(--background-color);
+  }
+}

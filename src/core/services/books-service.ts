@@ -9,7 +9,8 @@ export namespace BooksService {
         const data: Book[] = [];
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-            data.push(doc.data() as Book);
+            const book = {...doc.data(), uid: doc.id} as Book;
+            data.push(book);
         });
         return data;
     }

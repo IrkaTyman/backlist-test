@@ -7,6 +7,7 @@ import {ToastContainer} from 'react-toastify';
 import {RootRouter} from './routes/RootRouter';
 import 'react-toastify/scss/main.scss';
 import {Header} from "./components/Header";
+import {BookModalForm} from "./components/BookModalForm";
 
 export const App: FC = () => {
     return (
@@ -26,6 +27,7 @@ export const App: FC = () => {
                     </div>
                     <ToastContainer/>
                 </Suspense>
+                <BookModalForm/>
             </ConfigProvider>
         </BrowserRouter>
     );
