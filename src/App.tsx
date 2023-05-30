@@ -6,6 +6,7 @@ import {ToastContainer} from 'react-toastify';
 
 import {RootRouter} from './routes/RootRouter';
 import 'react-toastify/scss/main.scss';
+import {Header} from "./components/Header";
 
 export const App: FC = () => {
     return (
@@ -18,6 +19,7 @@ export const App: FC = () => {
                         fontWeightStrong: 400,
                     },
                 }}>
+                <Header/>
                 <Suspense fallback={<Spin/>}>
                     <div className="content">
                         <RootRouter/>

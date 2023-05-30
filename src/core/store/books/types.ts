@@ -1,12 +1,14 @@
 import {Book} from "../../models/book";
-import {BooksData} from "../../models/books-data";
 import {Ordering} from "../../models/ordering";
 
 /** Books state. */
 export type BooksState = {
 
     /** Books. */
-    readonly books: BooksData | null;
+    readonly books: Book[] | null;
+
+    /** Best books. */
+    readonly bestBook: Book | null;
 
     /** Is loading books. */
     readonly isLoading: boolean;

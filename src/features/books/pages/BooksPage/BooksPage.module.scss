@@ -1,0 +1,74 @@
+.books-page {
+  .books-page__container {
+    width: 100%;
+    max-width: 1335px;
+    margin: 0 auto;
+    padding: var(--space-medium);
+  }
+
+  .books-page__best-book {
+    background-color: var(--secondary-background-color);
+    display: flex;
+    justify-content: space-between;
+
+    .books-page__best-book__title {
+      color: var(--active-test-color);
+    }
+
+    .books-page__best-book__actions {
+
+      .books-page__best-book__action {
+
+      }
+    }
+
+    .books-page__best-book__content {
+      width: 100%;
+
+      .books-page__best-book__cover {
+        &.books-page__best-book__cover_empty {
+
+        }
+
+        .books-page__best-book__rating-wrapper {
+          img {
+
+          }
+
+          .books-page__best-book__rating {
+
+          }
+        }
+      }
+
+      .books-page__best-book__info {
+        .books-page__best-book__name {
+
+        }
+
+        .books-page__best-book__author {
+
+        }
+
+        .books-page__best-book__add-info {
+
+        }
+      }
+    }
+  }
+
+  .books-page__catalog {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-medium);
+
+    .books-page__catalog__h2 {
+      flex-basis: 100%;
+      flex-grow: 1;
+    }
+
+    .books-page__book {
+
+    }
+  }
+}

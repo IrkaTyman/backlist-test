@@ -13,7 +13,9 @@
   --background-color: #F6F5F7;
   --inactive-text-color: #828087;
   --active-element-color: #573BA3;
+  --active-test-color: #FFF1E6;
   --active-element-background-color: #ebe5ff;
+  --secondary-background-color: #FFF1E6;
 
   /* Font Size */
   --root-fs: 16px;
@@ -26,8 +28,8 @@
   --title-fs-large: calc(var(--root-fs) * 1.875);
 
   /* Box Shadow */
-  --box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-  --box-shadow-hover: 0px 11px 18px rgba(0,0,0,0.3);
+  --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  --box-shadow-hover: 0px 11px 18px rgba(0, 0, 0, 0.3);
 }
 
 html {

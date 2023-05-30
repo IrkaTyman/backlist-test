@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {useBooksStore} from "../../store/books/store";
 import {Ordering} from "../../models/ordering";
 
@@ -9,6 +9,7 @@ type Props = Readonly<{
 
 export const useBooksState = (props:Props) => {
     const books = useBooksStore(store => store.books);
+    const bestBook = useBooksStore(store => store.bestBook);
     const isLoading = useBooksStore(store => store.isLoading);
     const errorStatus = useBooksStore(store => store.errorStatus);
     const updateBooks = useBooksStore(store => store.updateBooks);
@@ -19,6 +20,7 @@ export const useBooksState = (props:Props) => {
 
     return{
         books,
+        bestBook,
         isLoading,
         errorStatus
     }
