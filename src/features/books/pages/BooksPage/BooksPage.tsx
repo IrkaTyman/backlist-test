@@ -20,7 +20,10 @@ const BooksPageComponent: FC = () => {
         for (let i = 0; i < books.length; i++) {
             if (prevSortingValue !== books[i].publicationYear) {
                 prevSortingValue = books[i].publicationYear
-                //elements.push(<h2 className={`${classes['books-page__catalog__h2']}`}>Год выпуска: {prevSortingValue}</h2>)
+                elements.push(<div className={`${classes['books-page__catalog__subtitle_wrapper']}`}>
+                    <Title level={2} className={`${classes['books-page__catalog__subtitle']}`}>Год выпуска: {prevSortingValue}</Title>
+                    <hr/>
+                </div>)
             }
             elements.push(<BookCard {...books[i]}/>)
         }
@@ -34,7 +37,7 @@ const BooksPageComponent: FC = () => {
         <div className={`${classes['books-page']}`}>
             {bestBook &&
                 <div className={`${classes['books-page__best-book']}`}>
-                    <Title className={`${classes[' .books-page__best-book__title']}`}>#ЛУЧШЕЕ</Title>
+                    <Title className={`${classes['books-page__best-book__title']}`}>#ЛУЧШЕЕ</Title>
 
                     <div className={`${classes['books-page__best-book__actions']}`}>
                         <Tooltip title={'Редактировать книгу'} mouseEnterDelay={0.5}>
@@ -59,13 +62,13 @@ const BooksPageComponent: FC = () => {
                                         </Text>
                                     </div>}
                             </div>
-                            : <div className={`${classes['books-page__best-book__cover']}`}>
+                            : <div className={`${classes['books-page__best-book__cover']} ${classes['books-page__best-book__cover_empty']}`}>
                                 <Text>Нет обложки</Text>
                             </div>
                         }
                         <div className={`${classes['books-page__best-book__info']}`}>
-                            <Text className={`${classes['books-page__best-book__name']}`}>Name</Text>
-                            <Text className={`${classes['book-card__authors']}`}>Authors</Text>
+                            <Text className={`${classes['books-page__best-book__name']}`}>{bestBook.name}</Text>
+                            <Text className={`${classes['book-card__authors']}`}>{bestBook.authors}</Text>
                             {bestBook.publicationYear !== null
                                 && <Text className={`${classes['books-page__best-book__add-info']}`}>
                                     Год выпуска: {bestBook.publicationYear}

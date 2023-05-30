@@ -16,7 +16,7 @@ export const useBooksStore = create<BooksState & BooksActions>(set => ({
             const book = books[i];
             if((book.publicationYear === null || book.publicationYear <= new Date().getFullYear() - 3)
             && (bestBook === null || (book.rating || 0) > (bestBook.rating || 0))
-            && Math.random()*10 < 5){
+            && (Math.random()*10 < 5 || bestBook === null)){
                 bestBook = book;
             }
         }

@@ -1,12 +1,15 @@
-h1.ant-typography{
+h1.ant-typography {
   font-size: var(--title-fs-medium);
   font-family: 'Zen Antique', serif;
   padding-bottom: var(--space-medium);
+  margin: 0;
 }
 
 h2.ant-typography {
   font-size: var(--title-fs-small);
   font-family: 'Zen Antique', serif;
   color: var(--inactive-text-color);
-  padding-bottom: var(--space-medium)
+  padding-bottom: var(--space-medium);
+  margin: 0;
+  font-weight: normal;
 }

@@ -9,49 +9,89 @@
   .books-page__best-book {
     background-color: var(--secondary-background-color);
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+    gap: var(--space-medium);
+    padding: var(--space-large) max(calc((100vw - 1335px) / 2), var(--space-medium));
+    margin-bottom: var(--space-medium);
 
     .books-page__best-book__title {
-      color: var(--active-test-color);
+      color: var(--active-text-color);
+      padding-bottom: 0;
     }
 
     .books-page__best-book__actions {
+      display: flex;
+      gap: var(--space-medium);
 
       .books-page__best-book__action {
-
+        cursor: pointer;
       }
     }
 
     .books-page__best-book__content {
       width: 100%;
+      flex-basis: 100%;
+      flex-grow: 1;
+      display: flex;
+      gap: var(--space-medium);
 
       .books-page__best-book__cover {
-        &.books-page__best-book__cover_empty {
+        width: 180px;
+        height: 260px;
+        border-radius: var(--border-radius-small);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
 
+        &.books-page__best-book__cover_empty {
+          background-color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .books-page__best-book__rating-wrapper {
-          img {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          background-color: #fff;
+          border-top-right-radius: var(--border-radius-small);
+          padding: var(--space-very-small);
+          display: flex;
+          align-items: center;
 
+          img {
+            height: var(--text-fs-small);
+            width: var(--text-fs-small);
           }
 
           .books-page__best-book__rating {
-
+            font-size: var(--text-fs-small);
+            margin-left: var(--space-very-small);
           }
         }
       }
 
       .books-page__best-book__info {
-        .books-page__best-book__name {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-medium);
 
+        .books-page__best-book__name {
+          font-family: 'Zen Antique', serif;
+          font-size: var(--title-fs-large);
+          color: var(--active-text-color);
         }
 
         .books-page__best-book__author {
-
+          color: var(--active-text-color);
         }
 
         .books-page__best-book__add-info {
-
+          color: var(--inactive-text-color);
         }
       }
     }
@@ -62,10 +102,28 @@
     flex-wrap: wrap;
     gap: var(--space-medium);
 
-    .books-page__catalog__h2 {
+    .books-page__catalog__subtitle_wrapper{
+      display: flex;
+      gap: var(--space-medium);
       flex-basis: 100%;
       flex-grow: 1;
+      margin: var(--space-medium) 0 var(--space-medium) 0;
+      white-space: nowrap;
+      align-items: center;
+
+      .books-page__catalog__subtitle {
+        color: var(--inactive-text-color);
+        padding-bottom: 0;
+      }
+
+      hr{
+        background-color: var(--active-element-background-color);
+        color:  var(--active-element-background-color);
+        height:1px;
+        width: 100%;
+      }
     }
+
 
     .books-page__book {
 
