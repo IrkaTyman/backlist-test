@@ -7,24 +7,27 @@ import deleteIcon from "../../../../assets/icons/delete.svg";
 import ratingIcon from "../../../../assets/icons/rating.svg";
 import {Book} from "../../../../core/models/book";
 import {BookCard} from "../../../../components/BookCard";
-import {useBooksStore} from "../../../../core/store/books/store"; // only needs to be imported once
+import {useBooksStore} from "../../../../core/store/books/store";
+import {SortingBooksSelect} from "../../../../components/SortingBooksSelect";
+import {Sorting} from "../../../../core/models/sorting"; // only needs to be imported once
 
 const {Title, Text} = Typography;
 
 const BooksPageComponent: FC = () => {
-    const {books, errorStatus, isLoading, bestBook, sorting, setSortingState, ordering, deleteBook} = useBooksState()
+    const {books, errorStatus, isLoading, bestBook, sorting, setSortingState, deleteBook} = useBooksState()
     const setEditorState = useBooksStore(store => store.setEditorState)
 
-    const renderBooks = (books: Book[]) => {
+    function renderBooks(books: Book[]) {
         const elements: React.ReactElement[] = [];
         let prevSortingValue = null;
 
         for (let i = 0; i < books.length; i++) {
-            if (prevSortingValue !== books[i].publicationYear) {
-                prevSortingValue = books[i].publicationYear
+            if (prevSortingValue !== books[i][sorting.name]) {
+                prevSortingValue = books[i][sorting.name]
                 elements.push(<div className={`${classes['books-page__catalog__subtitle_wrapper']}`} key={`title-${i}`}>
-                    <Title level={2} className={`${classes['books-page__catalog__subtitle']}`}>Год
-                        выпуска: {prevSortingValue}</Title>
+                    <Title level={2} className={`${classes['books-page__catalog__subtitle']}`}>
+                        {onSubtitleGet(sorting)}: {prevSortingValue}
+                    </Title>
                     <hr/>
                 </div>)
             }
@@ -33,6 +36,16 @@ const BooksPageComponent: FC = () => {
         return elements;
     }
 
+    function onSubtitleGet(sorting: Sorting): string {
+        switch (sorting.name) {
+            case 'publicationYear':
+                return 'Год публикации';
+            case 'rating':
+                return 'Рейтинг';
+            default:
+                return ''
+        }
+    }
 
     if (isLoading) return <Spin/>
     if (books === null) return null;
@@ -89,7 +102,11 @@ const BooksPageComponent: FC = () => {
                     </div>
                 </div>}
 
-            <Title className={`${classes['books-page__container']}`}>Книги каталога</Title>
+            <div className={`${classes['books-page__container']} ${classes['books-page__catalog_header']}`}>
+                <Title>Книги каталога</Title>
+                <SortingBooksSelect onChange={setSortingState} sorting={sorting}/>
+            </div>
+
             <div className={`${classes['books-page__catalog']} ${classes['books-page__container']}`}>
                 {renderBooks(books)}
             </div>

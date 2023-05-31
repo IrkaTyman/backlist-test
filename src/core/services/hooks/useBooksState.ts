@@ -16,13 +16,12 @@ export const useBooksState = () => {
     const isLoading = useBooksStore(store => store.isLoading);
     const errorStatus = useBooksStore(store => store.errorStatus);
     const sorting = useBooksStore(store => store.sorting);
-    const ordering = useBooksStore(store => store.ordering);
     const setSortingState = useBooksStore(store => store.setSortingState);
-    const updateBooks = useBooksStore(store => () => store.updateBooks(store.sorting, store.ordering));
+    const updateBooks = useBooksStore(store => () => store.updateBooks(store.sorting));
 
     useEffect(() => {
         updateBooks();
-    }, [sorting, ordering]);
+    }, [sorting]);
 
     async function deleteBook(book: Book) {
         if (!window.confirm(`Удалить книгу «${book.name}»?`)) {
@@ -43,7 +42,6 @@ export const useBooksState = () => {
         isLoading,
         errorStatus,
         sorting,
-        ordering,
         setSortingState,
         deleteBook
     }

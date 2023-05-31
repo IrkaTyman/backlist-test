@@ -1,5 +1,5 @@
 import {Book} from "../../models/book";
-import {Ordering} from "../../models/ordering";
+import {Sorting} from "../../models/sorting";
 
 /** Books state. */
 export type BooksState = Readonly<{
@@ -23,23 +23,20 @@ export type BooksState = Readonly<{
     editingBook: Book | null;
 
     /** Sorting. */
-    sorting: string;
-
-    /** Ordering. */
-    ordering: Ordering;
+    sorting: Sorting;
 }>
 
 /** Books actions. */
 export interface BooksActions {
 
     /** Update books. */
-    updateBooks(sorting: string, ordering: Ordering): void;
+    updateBooks(sorting: Sorting): void;
 
     /** Set editing book. */
     setEditorState(book: Book | null, isOpen: boolean): void;
 
     /** Set sorting state. */
-    setSortingState(sorting: string, ordering: Ordering): void;
+    setSortingState(sorting: Sorting): void;
 
     /** Reset store. */
     reset(): void;

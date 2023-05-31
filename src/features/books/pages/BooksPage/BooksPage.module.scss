@@ -7,7 +7,7 @@
   }
 
   .books-page__best-book {
-    background-color: var(--secondary-background-color);
+    background-color: var(--background-color);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -97,12 +97,18 @@
     }
   }
 
+  .books-page__catalog_header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-large);
+  }
+
   .books-page__catalog {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-medium);
 
-    .books-page__catalog__subtitle_wrapper{
+    .books-page__catalog__subtitle_wrapper {
       display: flex;
       gap: var(--space-medium);
       flex-basis: 100%;
@@ -116,10 +122,10 @@
         padding-bottom: 0;
       }
 
-      hr{
+      hr {
         background-color: var(--active-element-background-color);
-        color:  var(--active-element-background-color);
-        height:1px;
+        color: var(--active-element-background-color);
+        height: 1px;
         width: 100%;
       }
     }

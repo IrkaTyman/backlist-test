@@ -14,6 +14,7 @@ export const validationSchema = Yup.object({
         .nullable()
         .matches(ISBNRegex, 'Введите корректный ISBN'),
     rating: Yup.number()
+        .integer('Введите целое число')
         .nullable()
         .min(0, 'Введите число от 0 до 5')
         .max(5, 'Введите число от 0 до 5'),

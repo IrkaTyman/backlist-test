@@ -1,20 +1,21 @@
 import {dbBooks} from "./firestore";
 import {query, getDocs, orderBy, setDoc, addDoc, doc, deleteDoc} from "firebase/firestore";
 import {Book} from "../models/book";
-import {Ordering} from "../models/ordering";
 import {BookMapper} from "./book-mapper";
 import {BookDto} from "../dto/book-dto";
+import {Sorting} from "../models/sorting";
 
 export namespace BooksService {
-    export async function getBooks(sortingName: string, ordering: Ordering): Promise<Book[] | null> {
+    export async function getBooks(sorting: Sorting): Promise<Book[] | null> {
         try {
-            const q = query(dbBooks, orderBy(sortingName, ordering), orderBy('name'))
+            const q = query(dbBooks, orderBy(sorting.name, sorting.order), orderBy('name'))
             const data: Book[] = [];
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
                 const book = BookMapper.fromDto(doc.data() as BookDto, doc.id);
                 data.push(book);
             });
+
             return data;
         } catch (error) {
             return null;

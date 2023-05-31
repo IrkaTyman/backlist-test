@@ -2,16 +2,15 @@ import {create} from 'zustand';
 import {BooksState, BooksActions} from './types';
 import {initialState} from './state';
 import {BooksService} from "../../services/books-service";
-import {Ordering} from "../../models/ordering";
 import {Book} from "../../models/book";
+import {Sorting} from "../../models/sorting";
 
 export const useBooksStore = create<BooksState & BooksActions>(set => ({
     ...initialState,
-    async updateBooks(sorting: string, ordering: Ordering) {
+    async updateBooks(sorting: Sorting) {
         set(() => ({isLoading: true, errorStatus: null, books: null}))
-        const books = await BooksService.getBooks(sorting, ordering);
+        const books = await BooksService.getBooks(sorting);
         let bestBook: Book | null = null;
-
         if (books !== null) {
             for (let i = 0; i < books.length; i++) {
                 const book = books[i];
@@ -27,8 +26,8 @@ export const useBooksStore = create<BooksState & BooksActions>(set => ({
     setEditorState(book, isOpen) {
         set(() => ({editingBook: book, isEditorOpened: isOpen}))
     },
-    setSortingState(sorting: string, ordering: Ordering) {
-        set(() => ({sorting, ordering}));
+    setSortingState(sorting: Sorting) {
+        set(() => ({sorting}));
     },
     reset() {
         set(() => ({...initialState}));

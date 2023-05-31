@@ -7,7 +7,7 @@ export const useBookEditorState = () => {
     const editingBook = useBooksStore(store => store.editingBook);
     const setEditorState = useBooksStore(store => store.setEditorState)
     const isEditorOpened = useBooksStore(store => store.isEditorOpened);
-    const updateBooks = useBooksStore(store => () => store.updateBooks(store.sorting, store.ordering));
+    const updateBooks = useBooksStore(store => () => store.updateBooks(store.sorting));
 
     async function createBook(book: Book) {
         const isSuccess = await BooksService.createBook(book);

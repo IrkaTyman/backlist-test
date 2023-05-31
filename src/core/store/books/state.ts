@@ -7,6 +7,5 @@ export const initialState: BooksState = {
     errorStatus: null,
     isEditorOpened: false,
     editingBook: null,
-    sorting: 'publicationYear',
-    ordering: 'desc',
+    sorting: {name: 'publicationYear', order: 'desc'},
 };

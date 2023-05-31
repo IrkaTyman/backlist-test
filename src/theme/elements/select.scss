@@ -1,5 +1,25 @@
-.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  &,&.ant-select-item-option-active {
-    background-color: var(--active-element-background-color);
+.ant-select-dropdown {
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    &, &.ant-select-item-option-active {
+      background-color: var(--active-element-background-color);
+    }
+  }
+}
+
+.ant-select {
+  display: flex;
+  align-items: center;
+
+  .ant-select-selector {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .ant-select-selection-item {
+    color: var(--inactive-text-color);
+  }
+
+  &:hover .ant-select-selection-item {
+    color: #000;
   }
 }
