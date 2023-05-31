@@ -2,35 +2,44 @@ import {Book} from "../../models/book";
 import {Ordering} from "../../models/ordering";
 
 /** Books state. */
-export type BooksState = {
+export type BooksState = Readonly<{
 
     /** Books. */
-    readonly books: Book[] | null;
+    books: Book[] | null;
 
     /** Best books. */
-    readonly bestBook: Book | null;
+    bestBook: Book | null;
 
     /** Is loading books. */
-    readonly isLoading: boolean;
+    isLoading: boolean;
 
     /** Error status while loading data. */
-    readonly errorStatus: number | null;
+    errorStatus: number | null;
 
     /** Is opened book editor. */
-    readonly isEditorOpened: boolean;
+    isEditorOpened: boolean;
 
     /** Editing book. */
-    readonly editingBook: Book | null;
-}
+    editingBook: Book | null;
+
+    /** Sorting. */
+    sorting: string;
+
+    /** Ordering. */
+    ordering: Ordering;
+}>
 
 /** Books actions. */
 export interface BooksActions {
 
     /** Update books. */
-    updateBooks(sortingName: string, ordering?: Ordering): void;
+    updateBooks(sorting: string, ordering: Ordering): void;
 
     /** Set editing book. */
-    setEditorState(book: Book, isOpen: boolean): void;
+    setEditorState(book: Book | null, isOpen: boolean): void;
+
+    /** Set sorting state. */
+    setSortingState(sorting: string, ordering: Ordering): void;
 
     /** Reset store. */
     reset(): void;

@@ -25,9 +25,9 @@ export const App: FC = () => {
                     <div className="content">
                         <RootRouter/>
                     </div>
-                    <ToastContainer/>
                 </Suspense>
                 <BookModalForm/>
+                <ToastContainer/>
             </ConfigProvider>
         </BrowserRouter>
     );

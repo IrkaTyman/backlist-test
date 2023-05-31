@@ -6,50 +6,61 @@ import {typedMemo} from "core/utils/typed-memo";
 import ratingIcon from "assets/icons/rating.svg";
 import editIcon from "assets/icons/edit.svg";
 import deleteIcon from "assets/icons/delete.svg";
+import {useBooksStore} from "../../core/store/books/store";
 
 const {Text} = Typography;
 
-type Props = Readonly<Book & {}>
+type Props = Readonly<{
+    book: Book;
+    deleteBook(book: Book): void;
+}>
 
-const BookCardComponent: FC<Props> = (props) => {
+const BookCardComponent: FC<Props> = ({book, deleteBook}) => {
+    const setEditorState = useBooksStore(store => store.setEditorState)
+
     return (
         <div className={`${classes['book-card']}`}>
             <div className={`${classes['book-card__cover-wrapper']}`}>
-                {props.cover ?
+                {book.cover ?
                     <div className={`${classes['book-card__cover']}`}
-                         style={{backgroundImage: `url(${props.cover})`}}/>
+                         style={{backgroundImage: `url(${book.cover})`}}/>
                     : <div className={`${classes['book-card__cover-empty']}`}>
                         <Text>Нет обложки</Text>
                     </div>
                 }
-                {props.rating !== null
+                {book.rating !== null
                     && <div className={`${classes['book-card__rating-wrapper']}`}>
                         <img src={ratingIcon} alt="book rating"/>
                         <Text className={`${classes['book-card__rating']}`}>
-                            {props.rating}
+                            {book.rating}
                         </Text>
                     </div>}
 
                 <div className={`${classes['book-card__actions']}`}>
                     <Tooltip title={'Редактировать книгу'} mouseEnterDelay={0.5}>
-                        <img className={`${classes['book-card__action']}`} src={editIcon}
+                        <img className={`${classes['book-card__action']}`}
+                             src={editIcon}
+                             onClick={() => setEditorState(book, true)}
                              alt="edit book's information"/>
                     </Tooltip>
                     <Tooltip title={'Удалить книгу'} mouseEnterDelay={0.5}>
-                        <img className={`${classes['book-card__action']}`} src={deleteIcon} alt="delete book"/>
+                        <img className={`${classes['book-card__action']}`}
+                             src={deleteIcon}
+                             onClick={() => deleteBook(book)}
+                             alt="delete book"/>
                     </Tooltip>
                 </div>
             </div>
 
-            <Text className={`${classes['book-card__name']}`}>{props.name}</Text>
-            <Text className={`${classes['book-card__authors']}`}>{props.authors}</Text>
-            {props.publicationYear !== null
+            <Text className={`${classes['book-card__name']}`}>{book.name}</Text>
+            <Text className={`${classes['book-card__authors']}`}>{book.authors}</Text>
+            {book.publicationYear !== null
                 && <Text className={`${classes['book-card__additional-info']}`}>
-                    Год выпуска: {props.publicationYear}
+                    Год выпуска: {book.publicationYear}
                 </Text>}
-            {props.ISBN !== null
+            {book.ISBN !== null
                 && <Text className={`${classes['book-card__additional-info']}`}>
-                    ISBN: {props.ISBN}
+                    ISBN: {book.ISBN}
                 </Text>}
         </div>
     )
