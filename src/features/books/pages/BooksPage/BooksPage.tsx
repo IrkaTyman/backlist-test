@@ -85,11 +85,13 @@ const BooksPageComponent: FC = () => {
                 </div>
             </div>
 
-            {gridType === GridType.Card ?
+            {books.length > 0 ?
+                gridType === GridType.Card ?
                 <div className={`${classes['books-page__catalog']} ${classes['books-page__container']}`}>
                     {renderCards(books, sorting, deleteBook)}
                 </div> :
-                <BookTable books={books} deleteBook={deleteBook}/>}
+                <BookTable books={books} deleteBook={deleteBook}/>
+                : <Title className={`${classes['books-page__empty-catalog']} ${classes['books-page__container']}`}>Книги не найдены</Title>}
         </div>
     );
 }

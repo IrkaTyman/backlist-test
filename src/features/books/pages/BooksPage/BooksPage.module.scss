@@ -123,13 +123,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-medium);
+    padding-top: 0;
 
     .books-page__catalog__subtitle_wrapper {
       display: flex;
       gap: var(--space-medium);
       flex-basis: 100%;
       flex-grow: 1;
-      margin: var(--space-medium) 0 var(--space-medium) 0;
+      margin-bottom: var(--space-medium);
       white-space: nowrap;
       align-items: center;
 
@@ -145,5 +146,10 @@
         width: 100%;
       }
     }
+  }
+
+  .books-page__empty-catalog{
+    text-align: center;
+    color: var(--inactive-text-color);
   }
 }

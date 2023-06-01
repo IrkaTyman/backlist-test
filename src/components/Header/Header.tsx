@@ -9,7 +9,9 @@ import {useBooksStore} from "../../core/store/books/store";
 type Props = Readonly<{}>
 
 const HeaderComponent: FC<Props> = (props) => {
-    const setEditorState = useBooksStore(store => store.setEditorState)
+    const setEditorState = useBooksStore(store => store.setEditorState);
+    const setSearch = useBooksStore(store => store.setSearch);
+    const updateBooks = useBooksStore(store => (search: string) => store.updateBooks(store.sorting, search))
 
     return (
         <header className={`${classes.header}`}>
@@ -17,6 +19,10 @@ const HeaderComponent: FC<Props> = (props) => {
                 <img src={logo} alt="backlist site"/>
             </div>
             <Search className={`${classes.column} ${classes.header__search}`}
+                    onSearch={value => {
+                        setSearch(value);
+                        updateBooks(value);
+                    }}
                     placeholder={'Поиск'}/>
             <div className={`${classes.column} ${classes.header__actions}`}>
                 <Button type={'text'} onClick={() => setEditorState(null, true)}>Добавить книгу</Button>

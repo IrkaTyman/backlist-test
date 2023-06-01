@@ -24,19 +24,25 @@ export type BooksState = Readonly<{
 
     /** Sorting. */
     sorting: Sorting;
+
+    /** Search. */
+    search: string;
 }>
 
 /** Books actions. */
 export interface BooksActions {
 
     /** Update books. */
-    updateBooks(sorting: Sorting): void;
+    updateBooks(sorting: Sorting, search: string): void;
 
     /** Set editing book. */
     setEditorState(book: Book | null, isOpen: boolean): void;
 
     /** Set sorting state. */
     setSortingState(sorting: Sorting): void;
+
+    /** Set search. */
+    setSearch(search: string): void;
 
     /** Reset store. */
     reset(): void;

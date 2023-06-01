@@ -8,4 +8,5 @@ export const initialState: BooksState = {
     isEditorOpened: false,
     editingBook: null,
     sorting: {name: 'publicationYear', order: 'desc'},
+    search: '',
 };

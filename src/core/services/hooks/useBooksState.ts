@@ -17,7 +17,7 @@ export const useBooksState = () => {
     const errorStatus = useBooksStore(store => store.errorStatus);
     const sorting = useBooksStore(store => store.sorting);
     const setSortingState = useBooksStore(store => store.setSortingState);
-    const updateBooks = useBooksStore(store => () => store.updateBooks(store.sorting));
+    const updateBooks = useBooksStore(store => () => store.updateBooks(store.sorting, store.search));
 
     useEffect(() => {
         updateBooks();

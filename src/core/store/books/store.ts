@@ -7,9 +7,9 @@ import {Sorting} from "../../models/sorting";
 
 export const useBooksStore = create<BooksState & BooksActions>(set => ({
     ...initialState,
-    async updateBooks(sorting: Sorting) {
+    async updateBooks(sorting: Sorting, search: string) {
         set(() => ({isLoading: true, errorStatus: null, books: null}))
-        const books = await BooksService.getBooks(sorting);
+        const books = await BooksService.getBooks(sorting, search);
         let bestBook: Book | null = null;
         if (books !== null) {
             for (let i = 0; i < books.length; i++) {
@@ -28,6 +28,9 @@ export const useBooksStore = create<BooksState & BooksActions>(set => ({
     },
     setSortingState(sorting: Sorting) {
         set(() => ({sorting}));
+    },
+    setSearch(search: string) {
+        set(() => ({search}));
     },
     reset() {
         set(() => ({...initialState}));

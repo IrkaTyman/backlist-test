@@ -1,14 +1,15 @@
 import {dbBooks} from "./firestore";
-import {query, getDocs, orderBy, setDoc, addDoc, doc, deleteDoc} from "firebase/firestore";
+import {query, getDocs, orderBy, setDoc, addDoc, doc, deleteDoc, where} from "firebase/firestore";
 import {Book} from "../models/book";
 import {BookMapper} from "./book-mapper";
 import {BookDto} from "../dto/book-dto";
 import {Sorting} from "../models/sorting";
 
 export namespace BooksService {
-    export async function getBooks(sorting: Sorting): Promise<Book[] | null> {
+    export async function getBooks(sorting: Sorting, search: string): Promise<Book[] | null> {
         try {
-            const q = query(dbBooks, orderBy(sorting.name, sorting.order), orderBy('name'))
+            const q = query(dbBooks, orderBy(sorting.name, sorting.order),
+                orderBy('name'))
             const data: Book[] = [];
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
@@ -16,6 +17,9 @@ export namespace BooksService {
                 data.push(book);
             });
 
+            if (search) {
+                return data.filter(book => book.name.includes(search) || book.authors.includes(search) || book.ISBN && book.ISBN.includes(search));
+            }
             return data;
         } catch (error) {
             return null;

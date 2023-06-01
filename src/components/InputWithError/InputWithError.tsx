@@ -12,7 +12,7 @@ type Props = Readonly<InputProps & {
 
 const InputWithErrorComponent: FC<Props> = (props) => {
     return (
-        <div className={`${props.containerClassName} ${classes['input-with-error']}`}>
+        <div className={`${props.containerClassName || ''} ${classes['input-with-error']}`}>
             <Input {...props} className={`${props.error ? classes['error-input'] : ''}`}/>
             <Text className={`${classes['error-message']}`}>
                 {props.error}
