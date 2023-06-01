@@ -4,7 +4,6 @@ import {sortingOptions, sortingValue} from "./config";
 import {Sorting} from "../../core/models/sorting";
 import {typedMemo} from "../../core/utils/typed-memo";
 import {SortingType} from "../../core/models/sorting-type";
-import classes from "./SortingBooksSelect.module.scss";
 
 type Props = Readonly<{
     onChange(value: Sorting): void;
@@ -23,7 +22,6 @@ const SortingBooksSelectComponent: FC<Props> = ({onChange, sorting}) => {
     }
 
     return (<Select options={sortingOptions}
-                    className={`${classes['sorting-books-select']}`}
                     value={onSortingTypeGet()}
                     onChange={(value) => onChange(sortingValue[value])}/>)
 }

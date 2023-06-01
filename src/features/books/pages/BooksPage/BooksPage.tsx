@@ -1,51 +1,23 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, useState} from 'react';
 import {useBooksState} from "../../../../core/services/hooks/useBooksState";
 import classes from "./BooksPage.module.scss";
 import {Spin, Tooltip, Typography} from "antd";
 import editIcon from "../../../../assets/icons/edit.svg";
 import deleteIcon from "../../../../assets/icons/delete.svg";
 import ratingIcon from "../../../../assets/icons/rating.svg";
-import {Book} from "../../../../core/models/book";
-import {BookCard} from "../../../../components/BookCard";
+import {renderCards} from "./render";
 import {useBooksStore} from "../../../../core/store/books/store";
 import {SortingBooksSelect} from "../../../../components/SortingBooksSelect";
-import {Sorting} from "../../../../core/models/sorting"; // only needs to be imported once
+import {BookTable} from "../../../../components/BookTable";
+import {CardGridIcon, RowGridIcon} from "../../../../components/Icons/Icons";
+import {GridType} from "../../../../components/BookTable/config";
 
 const {Title, Text} = Typography;
 
 const BooksPageComponent: FC = () => {
-    const {books, errorStatus, isLoading, bestBook, sorting, setSortingState, deleteBook} = useBooksState()
-    const setEditorState = useBooksStore(store => store.setEditorState)
-
-    function renderBooks(books: Book[]) {
-        const elements: React.ReactElement[] = [];
-        let prevSortingValue = null;
-
-        for (let i = 0; i < books.length; i++) {
-            if (prevSortingValue !== books[i][sorting.name]) {
-                prevSortingValue = books[i][sorting.name]
-                elements.push(<div className={`${classes['books-page__catalog__subtitle_wrapper']}`} key={`title-${i}`}>
-                    <Title level={2} className={`${classes['books-page__catalog__subtitle']}`}>
-                        {onSubtitleGet(sorting)}: {prevSortingValue}
-                    </Title>
-                    <hr/>
-                </div>)
-            }
-            elements.push(<BookCard book={books[i]} deleteBook={deleteBook} key={i}/>)
-        }
-        return elements;
-    }
-
-    function onSubtitleGet(sorting: Sorting): string {
-        switch (sorting.name) {
-            case 'publicationYear':
-                return 'Год публикации';
-            case 'rating':
-                return 'Рейтинг';
-            default:
-                return ''
-        }
-    }
+    const {books, errorStatus, isLoading, bestBook, sorting, setSortingState, deleteBook} = useBooksState();
+    const [gridType, setGridType] = useState(GridType.Card);
+    const setEditorState = useBooksStore(store => store.setEditorState);
 
     if (isLoading) return <Spin/>
     if (books === null) return null;
@@ -104,12 +76,20 @@ const BooksPageComponent: FC = () => {
 
             <div className={`${classes['books-page__container']} ${classes['books-page__catalog_header']}`}>
                 <Title>Книги каталога</Title>
-                <SortingBooksSelect onChange={setSortingState} sorting={sorting}/>
+                <div className={`${classes['books-page__settings']}`}>
+                    <CardGridIcon onClick={() => setGridType(GridType.Card)}
+                                  className={`${classes['books-page__grid-type']} ${gridType === GridType.Card ? classes['active'] : ''}`}/>
+                    <RowGridIcon onClick={() => setGridType(GridType.Row)}
+                                 className={`${classes['books-page__grid-type']} ${gridType === GridType.Row ? classes['active'] : ''}`}/>
+                    <SortingBooksSelect onChange={setSortingState} sorting={sorting}/>
+                </div>
             </div>
 
-            <div className={`${classes['books-page__catalog']} ${classes['books-page__container']}`}>
-                {renderBooks(books)}
-            </div>
+            {gridType === GridType.Card ?
+                <div className={`${classes['books-page__catalog']} ${classes['books-page__container']}`}>
+                    {renderCards(books, sorting, deleteBook)}
+                </div> :
+                <BookTable books={books} deleteBook={deleteBook}/>}
         </div>
     );
 }

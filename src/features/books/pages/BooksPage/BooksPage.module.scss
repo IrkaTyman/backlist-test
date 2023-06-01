@@ -1,9 +1,25 @@
 .books-page {
   .books-page__container {
     width: 100%;
-    max-width: 1335px;
+    max-width: var(--container-width);
     margin: 0 auto;
     padding: var(--space-medium);
+
+    .books-page__settings {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--space-medium);
+      gap: var(--space-small);
+
+      .books-page__grid-type {
+        fill: var(--inactive-text-color);
+        cursor: pointer;
+
+        &.active, &:hover {
+          fill: var(--active-element-color);
+        }
+      }
+    }
   }
 
   .books-page__best-book {
@@ -128,11 +144,6 @@
         height: 1px;
         width: 100%;
       }
-    }
-
-
-    .books-page__book {
-
     }
   }
 }
