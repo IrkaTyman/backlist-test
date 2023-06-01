@@ -7,16 +7,22 @@ import deleteIcon from "../../../../assets/icons/delete.svg";
 import ratingIcon from "../../../../assets/icons/rating.svg";
 import {renderCards} from "./render";
 import {useBooksStore} from "../../../../core/store/books/store";
-import {SortingBooksSelect} from "../../../../components/SortingBooksSelect";
+import {BooksSortingSelect} from "../../../../components/BooksSortingSelect";
 import {BookTable} from "../../../../components/BookTable";
 import {CardGridIcon, RowGridIcon} from "../../../../components/Icons/Icons";
 import {GridType} from "../../../../components/BookTable/config";
 
 const {Title, Text} = Typography;
 
+/** Books page. */
 const BooksPageComponent: FC = () => {
-    const {books, errorStatus, isLoading, bestBook, sorting, setSortingState, deleteBook} = useBooksState();
+
+    const {books, isLoading, bestBook, sorting, setSortingState, deleteBook} = useBooksState();
+
+    /** Book display type. */
     const [gridType, setGridType] = useState(GridType.Card);
+
+    /** Set editor state - editingBook and isOpened. */
     const setEditorState = useBooksStore(store => store.setEditorState);
 
     if (isLoading) return <Spin/>
@@ -81,7 +87,7 @@ const BooksPageComponent: FC = () => {
                                   className={`${classes['books-page__grid-type']} ${gridType === GridType.Card ? classes['active'] : ''}`}/>
                     <RowGridIcon onClick={() => setGridType(GridType.Row)}
                                  className={`${classes['books-page__grid-type']} ${gridType === GridType.Row ? classes['active'] : ''}`}/>
-                    <SortingBooksSelect onChange={setSortingState} sorting={sorting}/>
+                    <BooksSortingSelect onChange={setSortingState} sorting={sorting}/>
                 </div>
             </div>
 

@@ -7,6 +7,7 @@ import {Sorting} from "../../../../core/models/sorting";
 
 const {Title} = Typography;
 
+/** Render book cards. */
 export const renderCards = (books: Book[], sorting: Sorting, deleteBook: (book: Book) => void): React.ReactElement[] => {
     const elements: React.ReactElement[] = [];
     let prevSortingValue = null;
@@ -16,7 +17,7 @@ export const renderCards = (books: Book[], sorting: Sorting, deleteBook: (book: 
             prevSortingValue = books[i][sorting.name]
             elements.push(<div className={`${classes['books-page__catalog__subtitle_wrapper']}`} key={`title-${i}`}>
                 <Title level={2} className={`${classes['books-page__catalog__subtitle']}`}>
-                    {onSubtitleGet(sorting)}: {prevSortingValue}
+                    {getSubtitle(sorting)}: {prevSortingValue}
                 </Title>
                 <hr/>
             </div>)
@@ -26,7 +27,8 @@ export const renderCards = (books: Book[], sorting: Sorting, deleteBook: (book: 
     return elements;
 }
 
-function onSubtitleGet(sorting: Sorting): string {
+/** Get subtitle text from sorting name. */
+function getSubtitle(sorting: Sorting): string {
     switch (sorting.name) {
         case 'publicationYear':
             return 'Год публикации';

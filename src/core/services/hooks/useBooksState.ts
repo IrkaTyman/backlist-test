@@ -1,15 +1,10 @@
 import {useEffect} from 'react';
 import {useBooksStore} from "../../store/books/store";
-import {Ordering} from "../../models/ordering";
 import {Book} from "../../models/book";
 import {BooksService} from "../books-service";
 import {toast} from "react-toastify";
 
-type Props = Readonly<{
-    sortingName: string;
-    ordering?: Ordering
-}>
-
+/** Hook for book state */
 export const useBooksState = () => {
     const books = useBooksStore(store => store.books);
     const bestBook = useBooksStore(store => store.bestBook);
@@ -37,12 +32,26 @@ export const useBooksState = () => {
     }
 
     return {
+
+        /** All books */
         books,
+
+        /** Best book (if there) */
         bestBook,
+
+        /** Books is loading. */
         isLoading,
+
+        /** Error status getting books. */
         errorStatus,
+
+        /** Book sorting. */
         sorting,
+
+        /** Change sorting. */
         setSortingState,
+
+        /** Delete book. */
         deleteBook
     }
 }

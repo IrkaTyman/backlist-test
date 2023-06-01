@@ -1,6 +1,6 @@
 import React, {useState, FC, memo, useRef, useEffect} from "react";
-import {Button, Input, Upload, Typography} from "antd";
-import {Formik, Form, ErrorMessage} from "formik";
+import {Button, Upload, Typography} from "antd";
+import {Formik, Form} from "formik";
 import classes from "./BookModalForm.module.scss";
 import {CloseIcon, DeleteIcon} from "../Icons/Icons";
 import {useBookEditorState} from "../../core/services/hooks/useBookEditorState";
@@ -16,10 +16,10 @@ const BookModalFormComponent: FC = () => {
     const [authors, setAuthors] = useState<string[]>([''])
     const [file, setFile] = useState<File | null>(null);
     const modalRef = useRef<HTMLDivElement | null>(null);
-    const {setActive} = useClickAway([modalRef.current], onModalClose);
+    const {setIsActive} = useClickAway([modalRef.current], onModalClose);
 
     useEffect(() => {
-        setActive(true);
+        setIsActive(true);
     }, [isEditorOpened])
 
     useEffect(() => {

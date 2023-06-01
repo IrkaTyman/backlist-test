@@ -6,6 +6,8 @@ import {BookDto} from "../dto/book-dto";
 import {Sorting} from "../models/sorting";
 
 export namespace BooksService {
+
+    /** Axios: get books. */
     export async function getBooks(sorting: Sorting, search: string): Promise<Book[] | null> {
         try {
             const q = query(dbBooks, orderBy(sorting.name, sorting.order),
@@ -26,6 +28,7 @@ export namespace BooksService {
         }
     }
 
+    /** Axios: create books. */
     export async function createBook(book: Book): Promise<boolean> {
         try {
             await addDoc(dbBooks, BookMapper.toDto(book));
@@ -35,6 +38,7 @@ export namespace BooksService {
         }
     }
 
+    /** Axios: edit books. */
     export async function editBook(book: Book): Promise<boolean> {
         try {
             await setDoc(doc(dbBooks, book.uid), BookMapper.toDto(book));
@@ -44,6 +48,7 @@ export namespace BooksService {
         }
     }
 
+    /** Axios: delete books. */
     export async function deleteBook(uid: string): Promise<boolean> {
         try {
             await deleteDoc(doc(dbBooks, uid));

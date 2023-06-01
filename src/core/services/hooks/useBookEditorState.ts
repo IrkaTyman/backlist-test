@@ -3,6 +3,7 @@ import {Book} from "../../models/book";
 import {BooksService} from "../books-service";
 import {toast} from "react-toastify";
 
+/** Hook for book editor state */
 export const useBookEditorState = () => {
     const editingBook = useBooksStore(store => store.editingBook);
     const setEditorState = useBooksStore(store => store.setEditorState)
@@ -32,10 +33,20 @@ export const useBookEditorState = () => {
     }
 
     return {
+
+        /** Editing book or null (create book). */
         editingBook,
+
+        /** Is editor opened. */
         isEditorOpened,
+
+        /** Set editor state - book and isOpened. */
         setEditorState,
+
+        /** Edit book. */
         editBook,
+
+        /** Create book. */
         createBook,
     }
 }

@@ -6,10 +6,15 @@ import {typedMemo} from "core/utils/typed-memo";
 const {Text} = Typography;
 
 type Props = Readonly<InputProps & {
+
+    /** Error text. */
     error?: string;
+
+    /** ClassName form Input container. */
     containerClassName?: string;
 }>
 
+/** Component: Input with error support. */
 const InputWithErrorComponent: FC<Props> = (props) => {
     return (
         <div className={`${props.containerClassName || ''} ${classes['input-with-error']}`}>

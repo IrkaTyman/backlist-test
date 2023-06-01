@@ -1,1 +1,0 @@
-export {SortingBooksSelect} from "./SortingBooksSelect";

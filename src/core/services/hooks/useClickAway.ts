@@ -1,25 +1,30 @@
 import {useState, useEffect} from 'react'
 
-// Хук, регистрирующий нажатие вне переданных refs
+/** Hook for catching miss clicks. */
 export function useClickAway(refs: any[], onAwayClick: () => void) {
-    // Активен ли элемент
-    const [active, setActive] = useState(false)
-    // вешаю обработчик
+    const [isActive, setIsActive] = useState(false)
+
     useEffect(() => {
         window.addEventListener('mousedown', checkClickAway)
         return () => window.removeEventListener('mousedown', checkClickAway)
     }, [refs])
 
-    //Ф-ция, регистрирующая клик
+    /** Check click for miss. */
     function checkClickAway(event: any) {
         let path = event.composedPath()
-        //Если клик не попал ни на один элемент refs, то true
         let isClickAway = refs.every(ref => !path.includes(ref))
-        if (isClickAway && active) {
+        if (isClickAway && isActive) {
             onAwayClick()
-            setActive(false)
+            setIsActive(false)
         }
     }
 
-    return {active, setActive}
+    return {
+
+        /** Is active (didn't miss click). */
+        isActive,
+
+        /** Set isActive. */
+        setIsActive,
+    }
 }
