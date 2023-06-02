@@ -29,6 +29,9 @@ const BookEditorComponent: FC = () => {
 
     const {setIsActive} = useClickAway([modalRef.current], closeEditor);
 
+    /** Accept format for cover. */
+    const accept = useRef(['jpg', 'png', 'webp'])
+
     useEffect(() => {
         setIsActive(true);
     }, [isEditorOpened])
@@ -81,10 +84,10 @@ const BookEditorComponent: FC = () => {
     function beforeUpload(file: File) {
         const pathName = file.name.split('.');
         const maxSize = 8 * 1024 * 1024 * 2;
+
         let error = ''
-        if (pathName[pathName.length - 1] !== 'jpg'
-            && pathName[pathName.length - 1] !== 'png') {
-            error = 'Выбери изображение в формате .jpg, .png'
+        if (!accept.current.includes(pathName[pathName.length - 1])) {
+            error = `Выбери изображение в формате ${accept.current.join(', ')}`
         }
         if (file.size > maxSize) {
             if (error.length > 0) error += ', не больше 2Мб';
@@ -111,7 +114,7 @@ const BookEditorComponent: FC = () => {
                         {({values, setFieldValue, handleSubmit, errors, touched}) => (
                             <Form className={`${classes['book-form']}`}>
                                 <Upload className={`${classes['book-form__cover']}`}
-                                        accept={'.jpg, .png'}
+                                        accept={accept.current.reduce((prev, next) => prev += `.${next}, `, '')}
                                         maxCount={1}
                                         beforeUpload={beforeUpload}
                                         onChange={({file}) => {
