@@ -9,6 +9,7 @@ import {Book} from "../../core/models/book";
 import {useClickAway} from "../../core/services/hooks/useClickAway";
 import {InputWithError} from "../InputWithError";
 import {BooksService} from "../../core/services/books-service";
+import {toast} from "react-toastify";
 
 const {Text, Title} = Typography;
 
@@ -22,9 +23,6 @@ const BookEditorComponent: FC = () => {
 
     /** Cover file. */
     const [file, setFile] = useState<File | null>(null);
-
-    /** Error while uploaded file. */
-    const [fileError, setFileError] = useState<string | null>(null);
 
     /** Ref to modal component. */
     const modalRef = useRef<HTMLDivElement | null>(null);
@@ -79,6 +77,26 @@ const BookEditorComponent: FC = () => {
         setEditorState(null, false);
     }
 
+    /** Check file before upload. */
+    function beforeUpload(file: File) {
+        const pathName = file.name.split('.');
+        const maxSize = 8 * 1024 * 1024 * 2;
+        let error = ''
+        if (pathName[pathName.length - 1] !== 'jpg'
+            && pathName[pathName.length - 1] !== 'png') {
+            error = 'Выбери изображение в формате .jpg, .png'
+        }
+        if (file.size > maxSize) {
+            if (error.length > 0) error += ', не больше 2Мб';
+            else error = 'Выбери изображение не больше 2Мб';
+        }
+
+        if (error.length > 0) {
+            toast.error(error);
+            return false;
+        }
+    }
+
     return (
         <div className={`${classes['book-form__modal__overlay']} ${isEditorOpened ? classes['opened'] : ''}`}>
             <div className={`${classes['book-form__modal']}`} ref={modalRef}>
@@ -95,16 +113,7 @@ const BookEditorComponent: FC = () => {
                                 <Upload className={`${classes['book-form__cover']}`}
                                         accept={'.jpg, .png'}
                                         maxCount={1}
-                                        beforeUpload={(file) => {
-                                            const pathName = file.name.split('.');
-                                            const maxSize = 8 * 1024 * 1024 * 2;
-                                            if (pathName[pathName.length - 1] !== 'jpg'
-                                                && pathName[pathName.length - 1] !== 'png'
-                                                && file.size > maxSize) {
-                                                setFileError('Выберите изображение в формате .jpg, .png, не больше 2Мб')
-                                                return false;
-                                            }
-                                        }}
+                                        beforeUpload={beforeUpload}
                                         onChange={({file}) => {
                                             if (file.originFileObj === undefined) return;
                                             setFile(file.originFileObj || null);
