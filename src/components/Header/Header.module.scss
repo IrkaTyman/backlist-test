@@ -13,7 +13,9 @@
   }
 
   .header__logo{
-    height: var(--title-fs-large);
+    &, img{
+      height: var(--title-fs-large);
+    }
   }
 
   .header__search{
