@@ -17,7 +17,7 @@ export const renderCards = (books: Book[], sorting: Sorting, deleteBook: (book: 
             prevSortingValue = books[i][sorting.name]
             elements.push(<div className={`${classes['books-page__catalog__subtitle_wrapper']}`} key={`title-${i}`}>
                 <Title level={2} className={`${classes['books-page__catalog__subtitle']}`}>
-                    {getSubtitle(sorting)}: {prevSortingValue}
+                    {getSubtitle(sorting)}: {prevSortingValue === null ? 'Не указано' : prevSortingValue}
                 </Title>
                 <hr/>
             </div>)

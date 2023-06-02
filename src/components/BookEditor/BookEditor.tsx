@@ -83,6 +83,7 @@ const BookEditorComponent: FC = () => {
     /** Close editor. */
     function closeEditor() {
         setAuthors(['']);
+        setFile(null);
         setEditorState(null, false);
     }
 
@@ -164,6 +165,7 @@ const BookEditorComponent: FC = () => {
                                 <InputWithError value={values.publicationYear || ''}
                                                 onChange={(e) => setFieldValue('publicationYear', e.target.value)}
                                                 prefix={'Год публикации:'}
+                                                type={'number'}
                                                 error={errors.publicationYear}/>
 
                                 <InputWithError value={values.ISBN || ''}
@@ -174,6 +176,7 @@ const BookEditorComponent: FC = () => {
                                 <InputWithError value={values.rating || ''}
                                                 onChange={(e) => setFieldValue('rating', e.target.value)}
                                                 prefix={'Рейтинг:'}
+                                                type={'number'}
                                                 error={errors.rating}/>
 
                                 <div className={`${classes['book-form__authors-select']}`}>
