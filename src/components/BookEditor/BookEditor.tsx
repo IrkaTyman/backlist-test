@@ -50,7 +50,7 @@ const BookEditorComponent: FC = () => {
         if (authors.some(author => author.length == 0)) return;
 
         setIsSaving(true);
-        let coverUrl = editingBook ? editingBook.cover : null;
+        let coverUrl = book.cover;
         if (file) {
             coverUrl = await BooksService.uploadBookCover(file);
         }

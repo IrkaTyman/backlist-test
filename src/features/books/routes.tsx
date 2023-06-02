@@ -6,7 +6,7 @@ const BooksPage = lazy(() => import('./pages/BooksPage').then(module => ({defaul
 /** Books routes. */
 export const booksRoutes: RouteObject[] = [
     {
-        path: '/',
+        path: '/backlist-test/',
         element: <BooksPage/>,
     },
 ];

@@ -5,7 +5,7 @@ import {booksRoutes} from "../features/books/routes";
 const routes: RouteObject[] = [
     {
         path: '*',
-        element: <Navigate to="/"/>,
+        element: <Navigate to="/backlist-test/"/>,
     },
     ...booksRoutes,
 ];
