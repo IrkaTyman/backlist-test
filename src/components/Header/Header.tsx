@@ -6,11 +6,16 @@ import logo from "assets/logo.svg";
 import Search from "antd/es/input/Search";
 import {useBooksStore} from "../../core/store/books/store";
 
-type Props = Readonly<{}>
+/** Component: Header. */
+const HeaderComponent: FC = () => {
 
-const HeaderComponent: FC<Props> = (props) => {
+    /** Set editor state - editingBook and isOpened. */
     const setEditorState = useBooksStore(store => store.setEditorState);
+
+    /** Set search text. */
     const setSearch = useBooksStore(store => store.setSearch);
+
+    /** Update all books. */
     const updateBooks = useBooksStore(store => (search: string) => store.updateBooks(store.sorting, search))
 
     return (
@@ -27,7 +32,6 @@ const HeaderComponent: FC<Props> = (props) => {
             <div className={`${classes.column} ${classes.header__actions}`}>
                 <Button type={'text'} onClick={() => setEditorState(null, true)}>Добавить книгу</Button>
             </div>
-
         </header>
     )
 }

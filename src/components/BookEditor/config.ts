@@ -1,7 +1,10 @@
 import * as Yup from "yup";
 import {Book} from "../../core/models/book";
 
+/** Regex for ISBN match. */
 const ISBNRegex = /^(?:ISBN(?:-1[03])?:?●)?(?=[0-9X]{10}$|(?=(?:[0-9]+[-●]){3})[-●0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[-●]){4})[-●0-9]{17}$)(?:97[89][-●]?)?[0-9]{1,5}[-●]?[0-9]+[-●]?[0-9]+[-●]?[0-9X]$/
+
+/** Schema for validation book form. */
 export const validationSchema = Yup.object({
     name: Yup.string()
         .required('Введите название книги'),
@@ -20,6 +23,7 @@ export const validationSchema = Yup.object({
         .max(5, 'Введите число от 0 до 5'),
 })
 
+/** Default value for form (create book). */
 export const defaultFormValues: Book = {
     name: '',
     authors: '',

@@ -8,9 +8,9 @@ import ratingIcon from "../../../../assets/icons/rating.svg";
 import {renderCards} from "./render";
 import {useBooksStore} from "../../../../core/store/books/store";
 import {BooksSortingSelect} from "../../../../components/BooksSortingSelect";
-import {BookTable} from "../../../../components/BookTable";
+import {BooksTable} from "../../../../components/BooksTable";
 import {CardGridIcon, RowGridIcon} from "../../../../components/Icons/Icons";
-import {GridType} from "../../../../components/BookTable/config";
+import {GridType} from "./types";
 
 const {Title, Text} = Typography;
 
@@ -96,7 +96,7 @@ const BooksPageComponent: FC = () => {
                 <div className={`${classes['books-page__catalog']} ${classes['books-page__container']}`}>
                     {renderCards(books, sorting, deleteBook)}
                 </div> :
-                <BookTable books={books} deleteBook={deleteBook}/>
+                <BooksTable books={books} deleteBook={deleteBook}/>
                 : <Title className={`${classes['books-page__empty-catalog']} ${classes['books-page__container']}`}>Книги не найдены</Title>}
         </div>
     );

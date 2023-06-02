@@ -5,10 +5,11 @@ import React from "react";
 import {Tooltip, Typography} from "antd";
 import editIcon from "../../assets/icons/edit.svg";
 import deleteIcon from "../../assets/icons/delete.svg";
-import classes from './BookTable.module.scss'
+import classes from './BooksTable.module.scss'
 
 const {Text} = Typography;
 
+/** Books table columns. */
 export const getColumns = (setEditorState: (book: Book | null, isOpen: boolean) => void, deleteBook: (book: Book) => void): ColumnsType<Book> => ([
     {
         title: 'Название',

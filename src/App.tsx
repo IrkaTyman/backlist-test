@@ -1,13 +1,11 @@
 import React, {Suspense, FC} from 'react';
 import {BrowserRouter} from 'react-router-dom';
 import {Spin, ConfigProvider} from 'antd';
-
 import {ToastContainer} from 'react-toastify';
-
 import {RootRouter} from './routes/RootRouter';
 import 'react-toastify/scss/main.scss';
 import {Header} from "./components/Header";
-import {BookModalForm} from "./components/BookModalForm";
+import {BookEditor} from "./components/BookEditor";
 
 export const App: FC = () => {
     return (
@@ -26,7 +24,7 @@ export const App: FC = () => {
                         <RootRouter/>
                     </div>
                 </Suspense>
-                <BookModalForm/>
+                <BookEditor/>
                 <ToastContainer/>
             </ConfigProvider>
         </BrowserRouter>

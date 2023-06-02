@@ -11,11 +11,18 @@ import {useBooksStore} from "../../core/store/books/store";
 const {Text} = Typography;
 
 type Props = Readonly<{
+
+    /** Book. */
     book: Book;
+
+    /** Delete book. */
     deleteBook(book: Book): void;
 }>
 
+/** Component: Book card. */
 const BookCardComponent: FC<Props> = ({book, deleteBook}) => {
+
+    /** Set editor state - editingBook and isOpened. */
     const setEditorState = useBooksStore(store => store.setEditorState)
 
     return (

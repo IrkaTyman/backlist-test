@@ -24,7 +24,7 @@ export function useClickAway(refs: any[], onAwayClick: () => void) {
         /** Is active (didn't miss click). */
         isActive,
 
-        /** Set isActive. */
+        /** Set isActive (didn't miss click). */
         setIsActive,
     }
 }
