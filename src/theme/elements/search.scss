@@ -3,8 +3,8 @@
     .ant-input {
       background-color: var(--background-color);
       border-radius: var(--border-radius-large);
-      border-start-end-radius: 0;
-      border-end-end-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       padding: var(--space-small) var(--space-medium);
       border-color: var(--background-color);
       box-shadow: var(--background-color);
@@ -22,8 +22,8 @@
           background-color: var(--background-color);
           padding: var(--space-small) var(--space-medium);
           border-radius: var(--border-radius-large);
-          border-start-start-radius: 0;
-          border-end-start-radius: 0;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
           height: 100%;
           width: auto;
           border-color: var(--background-color);
