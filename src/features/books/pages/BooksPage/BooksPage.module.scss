@@ -32,6 +32,10 @@
     padding: var(--space-large) max(calc((100vw - 1335px) / 2), var(--space-medium));
     margin-bottom: var(--space-medium);
 
+    .books-page__best-book__actions{
+      margin-right: var(--space-small)
+    }
+
     .books-page__best-book__title {
       color: var(--active-text-color);
       padding-bottom: 0;
@@ -41,8 +45,9 @@
       width: 100%;
       flex-basis: 100%;
       flex-grow: 1;
-      display: flex;
-      gap: var(--space-medium);
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      grid-gap: var(--space-medium);
 
       .books-page__best-book__cover {
         width: 180px;
@@ -139,8 +144,34 @@
     }
   }
 
-  .books-page__empty-catalog{
+  .books-page__empty-catalog {
     text-align: center;
     color: var(--inactive-text-color);
+  }
+}
+
+@media(max-width: 560px) {
+  .books-page {
+    .books-page__catalog_header {
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-small);
+    }
+
+    .books-page__best-book {
+      .books-page__best-book__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media(max-width: 420px) {
+  .books-page {
+    .books-page__catalog {
+      justify-content: center;
+    }
   }
 }
