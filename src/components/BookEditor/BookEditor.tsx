@@ -29,6 +29,9 @@ const BookEditorComponent: FC = () => {
 
     const {setIsActive} = useClickAway([modalRef.current], closeEditor);
 
+    /** book is saving. */
+    const [isSaving, setIsSaving] = useState(false)
+
     /** Accept format for cover. */
     const accept = useRef(['jpg', 'png', 'webp'])
 
@@ -46,6 +49,7 @@ const BookEditorComponent: FC = () => {
     async function submit(book: Book) {
         if (authors.some(author => author.length == 0)) return;
 
+        setIsSaving(true);
         let coverUrl = null
         if (file) {
             coverUrl = await BooksService.uploadBookCover(file);
@@ -53,7 +57,9 @@ const BookEditorComponent: FC = () => {
 
         const parsedBook: Book = {...book, authors: authors.join(', '), cover: coverUrl};
 
-        editingBook ? editBook(parsedBook) : createBook(parsedBook);
+        editingBook ? await editBook(parsedBook) : await createBook(parsedBook);
+
+        setIsSaving(false);
     }
 
     /** Change book authors. */
@@ -194,11 +200,15 @@ const BookEditorComponent: FC = () => {
                                 </div>
 
                                 <div className={`${classes['book-form__buttons']}`}>
-                                    <Button type={'primary'} htmlType={'submit'}
+                                    <Button type={'primary'}
+                                            htmlType={'submit'}
+                                            loading={isSaving}
                                             onSubmit={() => handleSubmit()}>
                                         {editingBook ? 'Сохранить' : 'Добавить'}
                                     </Button>
-                                    <Button type={'default'} onClick={closeEditor}>Отмена</Button>
+                                    <Button type={'default'}
+                                            onClick={closeEditor}
+                                            disabled={isSaving}>Отмена</Button>
                                 </div>
                             </Form>
                         )}
