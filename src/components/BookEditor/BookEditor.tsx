@@ -8,6 +8,7 @@ import {defaultFormValues, validationSchema} from "./config";
 import {Book} from "../../core/models/book";
 import {useClickAway} from "../../core/services/hooks/useClickAway";
 import {InputWithError} from "../InputWithError";
+import {BooksService} from "../../core/services/books-service";
 
 const {Text, Title} = Typography;
 
@@ -38,9 +39,15 @@ const BookEditorComponent: FC = () => {
     }, [editingBook])
 
     /** Submit form. */
-    function submit(book: Book) {
+    async function submit(book: Book) {
         if (authors.some(author => author.length == 0)) return;
-        const parsedBook = {...book, authors: authors.join(', ')};
+
+        let coverUrl = null
+        if (file) {
+            coverUrl = await BooksService.uploadBookCover(file);
+        }
+
+        const parsedBook: Book = {...book, authors: authors.join(', '), cover: coverUrl};
 
         editingBook ? editBook(parsedBook) : createBook(parsedBook);
     }

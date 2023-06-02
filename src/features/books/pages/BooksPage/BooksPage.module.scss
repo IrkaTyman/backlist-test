@@ -37,15 +37,6 @@
       padding-bottom: 0;
     }
 
-    .books-page__best-book__actions {
-      display: flex;
-      gap: var(--space-medium);
-
-      .books-page__best-book__action {
-        cursor: pointer;
-      }
-    }
-
     .books-page__best-book__content {
       width: 100%;
       flex-basis: 100%;

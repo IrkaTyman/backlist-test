@@ -1,9 +1,9 @@
-.ant-table-wrapper{
-  .ant-table-thead >tr>th, .ant-table-thead >tr>td{
+.ant-table-wrapper {
+  .ant-table-thead > tr > th, .ant-table-thead > tr > td {
     background-color: var(--background-color);
   }
 
-  .ant-table-tbody >tr.ant-table-row:hover>td{
+  .ant-table-tbody > tr.ant-table-row:hover > td {
     background-color: var(--background-color);
   }
 }

@@ -1,14 +1,14 @@
-.ant-spin{
-  width:100%;
-  display:flex;
+.ant-spin {
+  width: 100%;
+  display: flex;
   justify-content: center;
   padding: var(--space-medium);
 
-  .ant-spin-dot{
+  .ant-spin-dot {
     width: calc(var(--text-fs-small) * 2.3);
     height: calc(var(--text-fs-small) * 2.3);
 
-    .ant-spin-dot-item{
+    .ant-spin-dot-item {
       background-color: var(--active-element-color);
       width: var(--text-fs-medium);
       height: var(--text-fs-medium);

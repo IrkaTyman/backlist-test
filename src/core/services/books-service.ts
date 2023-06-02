@@ -1,5 +1,6 @@
-import {dbBooks} from "./firestore";
-import {query, getDocs, orderBy, setDoc, addDoc, doc, deleteDoc, where} from "firebase/firestore";
+import {dbBooks, coverStorage} from "./firebase";
+import {query, getDocs, orderBy, setDoc, addDoc, doc, deleteDoc} from "firebase/firestore";
+import {uploadBytes, ref, getDownloadURL} from "firebase/storage";
 import {Book} from "../models/book";
 import {BookMapper} from "./book-mapper";
 import {BookDto} from "../dto/book-dto";
@@ -23,6 +24,18 @@ export namespace BooksService {
                 return data.filter(book => book.name.includes(search) || book.authors.includes(search) || book.ISBN && book.ISBN.includes(search));
             }
             return data;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    /** Axios: upload cover. */
+    export async function uploadBookCover(cover: File): Promise<string | null> {
+        try {
+            const imageRef = ref(coverStorage, cover.name)
+            await uploadBytes(imageRef, cover);
+            const url = await getDownloadURL(imageRef);
+            return url;
         } catch (error) {
             return null;
         }

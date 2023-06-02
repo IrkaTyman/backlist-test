@@ -2,10 +2,9 @@ import {Book} from "../../core/models/book";
 import {ColumnsType} from "antd/es/table";
 import ratingIcon from "../../assets/icons/rating.svg";
 import React from "react";
-import {Tooltip, Typography} from "antd";
-import editIcon from "../../assets/icons/edit.svg";
-import deleteIcon from "../../assets/icons/delete.svg";
+import {Typography} from "antd";
 import classes from './BooksTable.module.scss'
+import {BookActions} from "../BookActions";
 
 const {Text} = Typography;
 
@@ -48,20 +47,8 @@ export const getColumns = (setEditorState: (book: Book | null, isOpen: boolean) 
         title: '',
         key: 'action',
         render: (_, book) => (
-            <div className={`${classes['book-table__actions']}`}>
-                <Tooltip title={'Редактировать книгу'} mouseEnterDelay={0.5}>
-                    <img className={`${classes['book-table__action']}`}
-                         src={editIcon}
-                         onClick={() => setEditorState(book, true)}
-                         alt="edit book's information"/>
-                </Tooltip>
-                <Tooltip title={'Удалить книгу'} mouseEnterDelay={0.5}>
-                    <img className={`${classes['book-table__action']}`}
-                         src={deleteIcon}
-                         onClick={() => deleteBook(book)}
-                         alt="delete book"/>
-                </Tooltip>
-            </div>
+            <BookActions editBook={() => setEditorState(book, true)}
+                         deleteBook={() => deleteBook(book)}/>
         ),
     },
 ])

@@ -67,17 +67,7 @@
       right: 0;
       background-color: #fff;
       border-bottom-left-radius: var(--border-radius-small);
-      padding: var(--space-very-small);
-      display: flex;
-      align-items: center;
-      gap: var(--space-small);
       transition: 0.3s opacity;
-
-      .book-card__action {
-        width: var(--text-fs-medium);
-        height: var(--text-fs-medium);
-        cursor: pointer;
-      }
     }
 
     &:hover .book-card__actions {

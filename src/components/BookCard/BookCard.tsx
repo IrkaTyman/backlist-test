@@ -1,12 +1,11 @@
 import React, {FC} from 'react';
 import {Book} from "core/models/book";
 import classes from './BookCard.module.scss';
-import {Tooltip, Typography} from "antd";
+import {Typography} from "antd";
 import {typedMemo} from "core/utils/typed-memo";
 import ratingIcon from "assets/icons/rating.svg";
-import editIcon from "assets/icons/edit.svg";
-import deleteIcon from "assets/icons/delete.svg";
 import {useBooksStore} from "../../core/store/books/store";
+import {BookActions} from "../BookActions";
 
 const {Text} = Typography;
 
@@ -43,20 +42,9 @@ const BookCardComponent: FC<Props> = ({book, deleteBook}) => {
                         </Text>
                     </div>}
 
-                <div className={`${classes['book-card__actions']}`}>
-                    <Tooltip title={'Редактировать книгу'} mouseEnterDelay={0.5}>
-                        <img className={`${classes['book-card__action']}`}
-                             src={editIcon}
-                             onClick={() => setEditorState(book, true)}
-                             alt="edit book's information"/>
-                    </Tooltip>
-                    <Tooltip title={'Удалить книгу'} mouseEnterDelay={0.5}>
-                        <img className={`${classes['book-card__action']}`}
-                             src={deleteIcon}
-                             onClick={() => deleteBook(book)}
-                             alt="delete book"/>
-                    </Tooltip>
-                </div>
+                <BookActions editBook={() => setEditorState(book, true)}
+                             containerClassName={classes['book-card__actions']}
+                             deleteBook={() => deleteBook(book)}/>
             </div>
 
             <Text className={`${classes['book-card__name']}`}>{book.name}</Text>

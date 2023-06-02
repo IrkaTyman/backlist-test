@@ -17,18 +17,4 @@
       width: var(--text-fs-small);
     }
   }
-
-  .book-table__actions {
-    border-bottom-left-radius: var(--border-radius-small);
-    padding: var(--space-very-small);
-    display: flex;
-    align-items: center;
-    gap: var(--space-small);
-
-    .book-table__action {
-      width: var(--text-fs-medium);
-      height: var(--text-fs-medium);
-      cursor: pointer;
-    }
-  }
 }

@@ -1,5 +1,6 @@
-import {initializeApp} from 'firebase/app';
-import {getFirestore, collection} from 'firebase/firestore';
+import {initializeApp} from "firebase/app";
+import {getFirestore, collection} from "firebase/firestore";
+import {getStorage, ref} from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBAN5omgC3oNdUvvpe7Mrs4R9pY-6989Mg",
@@ -15,3 +16,7 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 export const dbBooks = collection(db, 'books');
+
+const storage = getStorage(app);
+
+export const coverStorage = ref(storage, 'cover');

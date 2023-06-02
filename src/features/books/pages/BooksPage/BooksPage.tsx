@@ -1,9 +1,7 @@
 import React, {FC, memo, useState} from 'react';
 import {useBooksState} from "../../../../core/services/hooks/useBooksState";
 import classes from "./BooksPage.module.scss";
-import {Spin, Tooltip, Typography} from "antd";
-import editIcon from "../../../../assets/icons/edit.svg";
-import deleteIcon from "../../../../assets/icons/delete.svg";
+import {Spin, Typography} from "antd";
 import ratingIcon from "../../../../assets/icons/rating.svg";
 import {renderCards} from "./render";
 import {useBooksStore} from "../../../../core/store/books/store";
@@ -11,6 +9,7 @@ import {BooksSortingSelect} from "../../../../components/BooksSortingSelect";
 import {BooksTable} from "../../../../components/BooksTable";
 import {CardGridIcon, RowGridIcon} from "../../../../components/Icons/Icons";
 import {GridType} from "./types";
+import {BookActions} from "../../../../components/BookActions";
 
 const {Title, Text} = Typography;
 
@@ -33,20 +32,9 @@ const BooksPageComponent: FC = () => {
                 <div className={`${classes['books-page__best-book']}`}>
                     <Title className={`${classes['books-page__best-book__title']}`}>#ЛУЧШЕЕ</Title>
 
-                    <div className={`${classes['books-page__best-book__actions']}`}>
-                        <Tooltip title={'Редактировать книгу'} mouseEnterDelay={0.5}>
-                            <img className={`${classes['books-page__best-book__action']}`}
-                                 src={editIcon}
-                                 onClick={() => setEditorState(bestBook, true)}
-                                 alt="edit book's information"/>
-                        </Tooltip>
-                        <Tooltip title={'Удалить книгу'} mouseEnterDelay={0.5}>
-                            <img className={`${classes['books-page__best-book__action']}`}
-                                 onClick={() => deleteBook(bestBook)}
-                                 src={deleteIcon}
-                                 alt="delete book"/>
-                        </Tooltip>
-                    </div>
+                    <BookActions editBook={() => setEditorState(bestBook, true)}
+                                 containerClassName={classes['books-page__best-book__actions']}
+                                 deleteBook={() => deleteBook(bestBook)}/>
 
                     <div className={`${classes['books-page__best-book__content']}`}>
                         {bestBook.cover ?
@@ -93,11 +81,13 @@ const BooksPageComponent: FC = () => {
 
             {books.length > 0 ?
                 gridType === GridType.Card ?
-                <div className={`${classes['books-page__catalog']} ${classes['books-page__container']}`}>
-                    {renderCards(books, sorting, deleteBook)}
-                </div> :
-                <BooksTable books={books} deleteBook={deleteBook}/>
-                : <Title className={`${classes['books-page__empty-catalog']} ${classes['books-page__container']}`}>Книги не найдены</Title>}
+                    <div className={`${classes['books-page__catalog']} ${classes['books-page__container']}`}>
+                        {renderCards(books, sorting, deleteBook)}
+                    </div> :
+                    <BooksTable books={books} deleteBook={deleteBook}/>
+                : <Title className={`${classes['books-page__empty-catalog']} ${classes['books-page__container']}`}>
+                    Книги не найдены
+                </Title>}
         </div>
     );
 }

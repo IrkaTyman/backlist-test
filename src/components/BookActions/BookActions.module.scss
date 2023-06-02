@@ -1,0 +1,12 @@
+.book-actions {
+  padding: var(--space-very-small);
+  display: flex;
+  align-items: center;
+  gap: var(--space-small);
+
+  .book-action {
+    width: var(--text-fs-medium);
+    height: var(--text-fs-medium);
+    cursor: pointer;
+  }
+}
