@@ -21,7 +21,10 @@ export namespace BooksService {
             });
 
             if (search) {
-                return data.filter(book => book.name.includes(search) || book.authors.includes(search) || book.ISBN && book.ISBN.includes(search));
+                const lowerSearch = search.toLowerCase();
+                return data.filter(book => book.name.toLowerCase().includes(lowerSearch) ||
+                    book.authors.toLowerCase().includes(lowerSearch) ||
+                    book.ISBN && book.ISBN.toLowerCase().includes(lowerSearch));
             }
             return data;
         } catch (error) {

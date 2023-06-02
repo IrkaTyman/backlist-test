@@ -25,8 +25,9 @@ const HeaderComponent: FC = () => {
             </div>
             <Search className={`${classes.column} ${classes.header__search}`}
                     onSearch={value => {
-                        setSearch(value);
-                        updateBooks(value);
+                        const parsedValue = value.trim();
+                        setSearch(parsedValue);
+                        updateBooks(parsedValue);
                     }}
                     placeholder={'Поиск'}/>
             <div className={`${classes.column} ${classes.header__actions}`}>
