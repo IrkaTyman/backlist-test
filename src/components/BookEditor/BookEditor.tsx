@@ -23,6 +23,9 @@ const BookEditorComponent: FC = () => {
     /** Cover file. */
     const [file, setFile] = useState<File | null>(null);
 
+    /** Error while uploaded file. */
+    const [fileError, setFileError] = useState<string | null>(null);
+
     /** Ref to modal component. */
     const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -90,7 +93,20 @@ const BookEditorComponent: FC = () => {
                         {({values, setFieldValue, handleSubmit, errors, touched}) => (
                             <Form className={`${classes['book-form']}`}>
                                 <Upload className={`${classes['book-form__cover']}`}
+                                        accept={'.jpg, .png'}
+                                        maxCount={1}
+                                        beforeUpload={(file) => {
+                                            const pathName = file.name.split('.');
+                                            const maxSize = 8 * 1024 * 1024 * 2;
+                                            if (pathName[pathName.length - 1] !== 'jpg'
+                                                && pathName[pathName.length - 1] !== 'png'
+                                                && file.size > maxSize) {
+                                                setFileError('Выберите изображение в формате .jpg, .png, не больше 2Мб')
+                                                return false;
+                                            }
+                                        }}
                                         onChange={({file}) => {
+                                            if (file.originFileObj === undefined) return;
                                             setFile(file.originFileObj || null);
                                             const url = URL.createObjectURL(file.originFileObj as Blob);
                                             setFieldValue('cover', url);
